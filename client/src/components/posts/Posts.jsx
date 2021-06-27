@@ -1,6 +1,5 @@
 import Post from "../post/Post";
 import "./posts.css";
-import Dropdown from "../../components/dropdown/Dropdown";
 
 export default function Posts({ posts }) {
   return (

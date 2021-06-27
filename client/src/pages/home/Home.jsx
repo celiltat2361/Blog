@@ -5,8 +5,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import "./home.css";
 import axios from "axios";
 import { useLocation } from "react-router";
-/* import Dropdown from "../../components/dropdown/Dropdown";
- */
+
 export default function Home() {
   const [posts, setPosts] = useState([]);
   const { search } = useLocation();
@@ -22,9 +21,7 @@ export default function Home() {
     <>
       <Header />
         <div className="home">
-          
           <Posts posts={posts} />
-          {/*   <Dropdown /> */}
           <Sidebar />
       </div>
     </>

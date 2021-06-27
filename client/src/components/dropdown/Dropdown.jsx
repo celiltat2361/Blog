@@ -4,21 +4,36 @@ import { useDetectOutsideClick } from "./useDetectOutsideClick";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import { useLocation } from "react-router";
+
 export default function Dropdown() {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const onClick = () => setIsActive(!isActive);
   const [users, setUsers] = useState([]);
+  const [post, setPost] = useState({});
+  const location = useLocation();
+  const path = location.pathname.split("/")[2];
+  
+  
 
   useEffect(() => {
     const getUsers = async () => {
-      const res = await axios.get("/users");
+      const res = await axios.get("/users/");
       setUsers(res.data);
     };
+
     getUsers();
   }, []);
   
-
+  useEffect(() => {
+    const getPost = async () => {
+      const res = await axios.get("/posts/" + path);
+      setPost(res.data);
+      
+    };
+    getPost();
+  }, [path]);
   return (
    <div className="container">
       <div className="menu-container">
@@ -33,11 +48,11 @@ export default function Dropdown() {
           ref={dropdownRef}
           className={`menu ${isActive ? "active" : "inactive"}`}
         > 
-          <ul className="sidebarList">
-            {users.map((user) => (
-              <Link to={`/?user=${user.name}`} className="link">
-                <li className="sidebarListItem">{user.name}</li>
-              </Link>
+          <ul className="dropList">
+            {users.map((u) => (
+              <Link to={`/?user=${u.username}`} className="link">
+              <b>{u.username}</b>
+            </Link>
           
             ))}
           </ul>

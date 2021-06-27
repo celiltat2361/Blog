@@ -1,7 +1,10 @@
 import "./header.css";
 import Dropdown from "../../components/dropdown/Dropdown";
+/* import SearchBar from "../../components/search/Search"; */
+
 
 export default function Header() {
+  
   return (
     <div className="header">
       <div className="headerTitles">
@@ -14,6 +17,8 @@ export default function Header() {
         alt=""
       />
       <Dropdown />
+      {/* <SearchBar /> */}
+     
     </div>
   );
 }

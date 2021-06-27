@@ -59,35 +59,15 @@ router.get("/:id", async (req, res) => {
 });
 
 //GET ALL USERS
-router.get("/userList", async (req, res) => {
-  try {
-    const users = await User.find(req.params.users);
-    const { password, ...others } = users._doc;
-    res.status(200).json(cats);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+router.get("/", async (req, res) => {
+  let users = await User.find().exec();
+   if( users.length === 0) {
+       return res.status(404).json({error : "Users could not found"})
+   } 
+   users = users.map((user) => {
+       return Object.assign(user, { password: undefined});
+   });
+   return res.json(users);
 })
 
-/* router.get("/", async (req, res) => {
-  const username = req.query.user;
-  const catName = req.query.cat;
-  try {
-    let posts;
-    if (username) {
-      posts = await Post.find({ username });
-    } else if (catName) {
-      posts = await Post.find({
-        categories: {
-          $in: [catName],
-        },
-      });
-    } else {
-      posts = await Post.find();
-    }
-    res.status(200).json(posts);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-}); */
 module.exports = router;
