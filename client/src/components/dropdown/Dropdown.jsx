@@ -3,7 +3,6 @@ import "./dropdown.css";
 import { useDetectOutsideClick } from "./useDetectOutsideClick";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
 import { useLocation } from "react-router";
 
 export default function Dropdown() {
@@ -15,8 +14,6 @@ export default function Dropdown() {
   const location = useLocation();
   const path = location.pathname.split("/")[2];
   
-  
-
   useEffect(() => {
     const getUsers = async () => {
       const res = await axios.get("/users/");
