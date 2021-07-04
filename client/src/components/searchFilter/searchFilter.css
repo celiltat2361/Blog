@@ -1,0 +1,18 @@
+.filterWrapper {
+  margin-left: 20px;
+}
+.filterInput {
+  font-family: "Josefin Sans", sans-serif;
+  margin-left: 10px;
+  width: 125px;
+height: 30px;
+  border-width: 0px;
+}
+.filterInput:focus {
+  outline: none;
+}
+
+.filterIcon {
+  margin-left: 10px;
+  width: 10px;
+}

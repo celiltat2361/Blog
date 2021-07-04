@@ -1,9 +1,9 @@
 import "./header.css";
 import Dropdown from "../../components/dropdown/Dropdown";
+import SearchFilter from "../searchFilter/SearchFilter";
 
 export default function Header() {
-
- return (
+  return (
     <div className="header">
       <div className="headerTitles">
         <span className="headerTitleSm">React & Node & MongoDB</span>
@@ -15,10 +15,9 @@ export default function Header() {
         alt=""
       />
       <div className="filterGroup">
-
-          <Dropdown />      
+        <Dropdown />
+        <SearchFilter />
       </div>
-     
     </div>
   );
 }

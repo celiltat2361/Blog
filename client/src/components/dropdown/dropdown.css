@@ -8,7 +8,6 @@ body {
 }
 
 .container {
-  flex: 6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,7 +78,7 @@ body {
 }
 
 .menu li {
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 0px solid #dddddd;
 }
 
 .menu li a {

@@ -18,19 +18,18 @@ export default function Sidebar() {
       <div className="sidebarItem">
         <span className="sidebarTitle">ABOUT ME</span>
         <img
-          src="https://images.unsplash.com/photo-1555421689-491a97ff2040?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+          src="https://images.pexels.com/users/avatars/72545590/celil-tat-104.jpeg?auto=compress&fit=crop&h=256&w=256"
           alt=""
         />
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate qui
-          necessitatibus nostrum illum reprehenderit.
+        I am Celil Tat and I am a front-end developer student in Medieinstitutet in Malmö. Before that I have worked as a video editor for 6 years in Turkish government TV (TRT), in Turkey.
         </p>
       </div>
       <div className="sidebarItem">
         <span className="sidebarTitle">CATEGORIES</span>
         <ul className="sidebarList">
-          {cats.map((c) => (
-            <Link to={`/?cat=${c.name}`} className="link">
+          {cats.map((c, index) => (
+            <Link key={c.name + index} to={`/?cat=${c.name}`} className="link">
               <li className="sidebarListItem">{c.name}</li>
             </Link>
             /* <Link to={`/post/${post._id}`} className="link">

@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   user: JSON.parse(localStorage.getItem("user")) || null,
   isFetching: false,
   error: false,
+  search: "",
 };
 
 export const Context = createContext(INITIAL_STATE);
@@ -22,6 +23,7 @@ export const ContextProvider = ({ children }) => {
         user: state.user,
         isFetching: state.isFetching,
         error: state.error,
+        search: state.search,
         dispatch,
       }}
     >

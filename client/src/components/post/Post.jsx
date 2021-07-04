@@ -12,8 +12,8 @@ export default function Post({ post }) {
         </Link>
 
         <div className="postCat">
-          {post.categories.map((c) => (
-            <span className="postCat">{post.categories[0]}</span>
+          {post.categories.map((c, index) => (
+            <span key={post.categories[0] + "-" + index} className="postCat">{post.categories[0]}</span>
           ))}
         </div>
         <span className="postDate">
