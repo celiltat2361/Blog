@@ -16,6 +16,8 @@ export default function SinglePost() {
   const [desc, setDesc] = useState("");
   const [updateMode, setUpdateMode] = useState(false);
   const [cat, setCat] = useState("");
+  const [author, setAuthor] = useState("");
+  const [authorID, setAuthorID] = useState("");
 
   useEffect(() => {
     const getPost = async () => {
@@ -24,6 +26,8 @@ export default function SinglePost() {
       setTitle(res.data.title);
       setDesc(res.data.desc);
       setCat(res.data.cat)
+      setAuthor(res.data.userID.username)
+      setAuthorID(res.data.userID._id)
     };
     getPost();
   }, [path]);
@@ -31,7 +35,7 @@ export default function SinglePost() {
   const handleDelete = async () => {
     try {
       await axios.delete(`/posts/${post._id}`, {
-        data: { username: user.username },
+        data: { userID: user._id },
       });
       window.location.replace("/");
     } catch (err) {}
@@ -40,7 +44,7 @@ export default function SinglePost() {
   const handleUpdate = async () => {
     try {
       await axios.put(`/posts/${post._id}`, {
-        username: user.username,
+        userID: user._id,
         title,
         desc,
         cat
@@ -66,7 +70,7 @@ export default function SinglePost() {
         ) : (
           <h1 className="singlePostTitle">
             {title}
-            {post.username === user?.username && (
+            {authorID === user?._id && (
               <div className="singlePostEdit">
                 <i
                   className="singlePostIcon far fa-edit"
@@ -83,10 +87,11 @@ export default function SinglePost() {
         <div className="singlePostInfo">
           <span className="singlePostAuthor">
             Author:
-            <Link to={`/?user=${post.username}`} className="link">
-              <b> {post.username}</b>
+            <Link to={`/?user=${author}`} className="link">
+              <b> {author}</b>
             </Link>
           </span>
+          {/* {console.log(post)} */}
           <span className="singlePostDate">
             {new Date(post.createdAt).toDateString()}
           </span>

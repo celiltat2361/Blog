@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    if (post.username === req.body.username) {
+    if (post.userID.toString() === req.body.userID) {
       try {
         const updatedPost = await Post.findByIdAndUpdate(
           req.params.id,
@@ -42,7 +42,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    if (post.username === req.body.username) {
+    if (post.userID.toString() === req.body.userID) {
       try {
         await post.delete();
         res.status(200).json("Post has been deleted...");
@@ -60,7 +60,10 @@ router.delete("/:id", async (req, res) => {
 //get blog
 router.get("/:id", async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.id).populate(
+      "userID",
+      "username"
+    );
     res.status(200).json(post);
   } catch (err) {
     res.status(500).json(err);
@@ -74,7 +77,12 @@ router.get("/", async (req, res) => {
   try {
     let posts;
     if (username) {
-      posts = await Post.find({ username });
+      const userObj = await User.findOne({ username });
+      console.log(username);
+      posts = await Post.find({ userID: userObj._id })
+
+        .populate("userID", "username")
+        .exec();
     } else if (catName) {
       posts = await Post.find({
         categories: {
@@ -82,7 +90,7 @@ router.get("/", async (req, res) => {
         },
       });
     } else {
-      posts = await Post.find();
+      posts = await Post.find().populate("userID", "username");
     }
     res.status(200).json(posts);
   } catch (err) {
